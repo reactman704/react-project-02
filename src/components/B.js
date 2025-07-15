@@ -1,8 +1,38 @@
 import React from 'react'
 
-const B = () => {
+
+const Message = React.memo(({message}) =>{
+  return <p>{message}</p>;
+})
+
+const ListItem = React.memo(({post}) =>{
+  
   return (
-    <div>B</div>
+    <li key={post.id}>
+      <p>{post.title}</p>
+    </li>
+  )
+}
+)
+
+const List = React.memo(({posts}) => {
+  return(
+    <ul>
+      {posts.map(post =>{
+        return <ListItem post={post} key={post.id}/> 
+      })}
+    </ul>
+  )
+}
+)
+
+const B = ({ message, posts }) => {
+  return (
+    <div>
+      <h1>B component</h1>
+      <Message message={message}/>
+      <List posts={posts}/>
+    </div>
   )
 }
 
